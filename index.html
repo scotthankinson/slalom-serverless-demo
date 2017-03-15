@@ -229,7 +229,7 @@ public class Hello {
 							<small>Create a different bucket for each Lifecycle</small>
 							<small>Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments</small>
 							<small>For continuous integration, automate dropping the right config file for that environment before syncing</small>
-							<small>Remember, any configuration is static and is therefore publicly viewable -- don't put API keys in here!</small>
+							<small>Remember, anything in the bucket is publicly accessible -- don't put API keys in here!</small>
 						</p>
 					</section>
 					<section>
@@ -259,7 +259,6 @@ stage('deploy') {
 						<h2>Organization - Back End</h2>
 						<p>
 							<small>How do you manage routes across multiple API Gateways leveraging multiple groups of Lamba Functions?</small>
-							<small class="fragment">Enter Serverless Framework</small>
 							<img class="fragment" data-src="assets/serverless-logo.png"></img>
 						</p>
 					</section>
@@ -269,8 +268,8 @@ stage('deploy') {
 						<p>
 							<small>As the number of Lambda Functions and their associated API Gateways grows, so too does the complexity</small>
 							<small class="fragment">Serverless Framework provides a way of describing a serverless "application", and then handles generating the CloudFormation to deploy these functions as a unit.</small>
-							<small class="fragment">Multiple Serverless Framework applications may then  be rolled up under a single API Gateway to generate the public facing API layer.</small>
-							<small class="fragment">Group like code with like in the repository, and have jenkins issue 'SLS deploy' to update</small>
+							<small class="fragment">Multiple Serverless Framework applications may then be rolled up under a single API Gateway to generate the public facing API layer.</small>
+							<small class="fragment">Group like code with like in the repository, and have Jenkins issue 'SLS deploy' to update</small>
 						</p>
 					</section>
 					<section>
@@ -288,7 +287,7 @@ stage('deploy') {
 					<ol>
 						<li>Route 53 / DNS Configuration</li>
 						<li>Front End - CloudFormation and S3</li>
-						<li>Back End - Api Gateway and Lambda</li>
+						<li>Back End - Serverless Framework</li>
 					</ol>
 				</section>
 
@@ -303,17 +302,18 @@ stage('deploy') {
 					</section>
 					<section>
 						<h2>Caveats</h2>
-						<h3><small>All APIs should be static</small></h3>
+						<h3><small>All APIs should be stateless</small></h3>
 						<p>
 							<small class="fragment">Functions should not rely on state stored to memory or disk, and have limited access to the underlying hardware and environment.</small>
-							<small class="fragment">Consider using DynamoDB, Redis, or S3 to store stateful information or use a queueing system to pass data from function to function</small>
+							<small class="fragment">Consider using DynamoDB, Redis, or S3 to store stateful information.</small>
+							<small class="fragment">Keep your functions lean -- too many items in startup lead to slow bloated functions</small>
 					</section>
 					<section>
 						<h2>Caveats</h2>
 						<h3><small>Database interactions can become trickier without a REST interface</small></h3>
 						<p>
 							<small class="fragment">There are strategies for sharing a connection pool, but you are not guaranteed to be able to re-use containers across invocations.  Best effort applies.</small>
-							<small class="fragment">For high throughput, a traditional ORM may still be required</small>
+							<small class="fragment">For high throughput, a traditional ORM-backed server environment may still be required</small>
 							<small class="fragment">Where possible, consider using DynamoDB (REST interface out of the box)</small>
 						</p>
 					</section>
