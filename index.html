@@ -64,7 +64,7 @@
 								<b>&ldquo;Despite the name, it does not actually involve running code without servers</b>. The name "serverless computing" is used because the business or person that owns the system does not have to purchase, rent or provision servers or virtual machines for the back-end code to run on.&rdquo;
 								<br>
 								<br>
-								Wikipedia
+								Miller, Ron (24 Nov 2015). <a href="https://techcrunch.com/2015/11/24/aws-lamda-makes-serverless-applications-a-reality/">"AWS Lambda Makes Serverless Applications A Reality"</a>
 							</q>
 						</small>
 					</section>
@@ -79,10 +79,10 @@
 						</p>
 					</section>
 					<section>
-						<h2>What does this document cover?</h2>
+						<h2>What does this presentation cover?</h2>
 						<img data-src="assets/AWS_BW.png"></img>
 						<p>
-							<small>Practical experience and ready to demo code mean that this document focuses largely on AWS tooling and components.  Many of the concepts may be transferable, but the core lens we will be using is Amazon Web Services </small>
+							<small>Practical experience and ready to demo code mean that this presentation focuses largely on AWS tooling and components.  Many of the concepts may be transferable, but the core lens we will be using is Amazon Web Services </small>
 						</p>
 					</section>
 				</section>
@@ -217,7 +217,7 @@ public class Hello {
 					<section>
 						<h2>Organization and Automation</h2>
 						<p>
-							<small>Lambda sounds awesome!  What happens when I have somethin bigger than hello world?</small>
+							<small>Lambda sounds awesome!  What happens when I have something bigger than hello world?</small>
 							<small>How do I manage my-awesome-function across lifecycles?</small>
 							<small>Are there convenient ways of grouping shared functionality?</small>
 						</p>
@@ -226,10 +226,18 @@ public class Hello {
 						<h2>Organization - Front End</h2>
 						<p>
 							<small>Use a different CloudFront distrubtion for each lifecycle</small>
-							<small>Create a different bucket for each Lifecycle</small>
-							<small>Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments</small>
-							<small>For continuous integration, automate dropping the right config file for that environment before syncing</small>
-							<small>Remember, anything in the bucket is publicly accessible -- don't put API keys in here!</small>
+						</p>
+						<p>
+							<small class="fragment">Create a different bucket for each Lifecycle</small>
+						</p>
+						<p>
+							<small class="fragment">Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments</small>
+						</p>
+						<p>
+							<small class="fragment">For continuous integration, automate dropping the right config file for that environment before syncing</small>
+						</p>
+						<p>
+							<small class="fragment">Remember, anything in the bucket is publicly accessible -- don't put API keys in here!</small>
 						</p>
 					</section>
 					<section>
@@ -264,12 +272,15 @@ stage('deploy') {
 					</section>
 					<section>
 						<h2>Organization - Back End</h2>
-						<h3><small>Serverless Framework</small></h3>
+						<img width="300px" data-src="assets/serverless-logo.png"></img>
 						<p>
-							<small>As the number of Lambda Functions and their associated API Gateways grows, so too does the complexity</small>
-							<small class="fragment">Serverless Framework provides a way of describing a serverless "application", and then handles generating the CloudFormation to deploy these functions as a unit.</small>
+							<small>Serverless Framework provides a way of describing a serverless "application", and then handles generating the CloudFormation to deploy these functions as a unit.</small>
+						</p>
+						<p>
 							<small class="fragment">Multiple Serverless Framework applications may then be rolled up under a single API Gateway to generate the public facing API layer.</small>
-							<small class="fragment">Group like code with like in the repository, and have Jenkins issue 'SLS deploy' to update</small>
+						</p>
+						<p>
+							<small class="fragment">Group like code with like in the repository, and have Jenkins issue the command 'serverless deploy' to update the code</small>
 						</p>
 					</section>
 					<section>
@@ -296,8 +307,10 @@ stage('deploy') {
 						<h2>Caveats</h2>
 						<h3><small>All Web content must be static</small></h3>
 						<p>
-							<small class="fragment">We already follow this architectural pattern in may places -- static web content fueled by disconneted backend APIs using OAuth or OpenId</small>
-							<small class="fragment">Angular and Ionic are excellent choices for cross-platform develoment -- the same site runs on Android, iOS, and web.</small>
+							<small class="fragment">We already follow this architectural pattern in may places -- static web content fueled by disconnected backend APIs using OAuth or OpenId.</small>
+						</p>
+						<p>
+							<small class="fragment">Angular and Ionic are excellent choices for cross-platform development -- the same site runs on Android, iOS, and web.</small>
 						</p>
 					</section>
 					<section>
@@ -305,16 +318,21 @@ stage('deploy') {
 						<h3><small>All APIs should be stateless</small></h3>
 						<p>
 							<small class="fragment">Functions should not rely on state stored to memory or disk, and have limited access to the underlying hardware and environment.</small>
+						</p>
+						<p>
 							<small class="fragment">Consider using DynamoDB, Redis, or S3 to store stateful information.</small>
-							<small class="fragment">Keep your functions lean -- too many items in startup lead to slow bloated functions</small>
+						</p>
+						<p>
+							<small class="fragment">Keep your functions lean -- too many items in startup lead to slow bloated functions.</small>
+						</p>
 					</section>
 					<section>
 						<h2>Caveats</h2>
 						<h3><small>Database interactions can become trickier without a REST interface</small></h3>
 						<p>
 							<small class="fragment">There are strategies for sharing a connection pool, but you are not guaranteed to be able to re-use containers across invocations.  Best effort applies.</small>
-							<small class="fragment">For high throughput, a traditional ORM-backed server environment may still be required</small>
-							<small class="fragment">Where possible, consider using DynamoDB (REST interface out of the box)</small>
+							<small class="fragment">For high throughput, a traditional ORM-backed server environment may still be required.</small>
+							<small class="fragment">Where possible, consider using DynamoDB or any other data layer with ready to use REST APIs.</small>
 						</p>
 					</section>
 					<section>
@@ -322,17 +340,25 @@ stage('deploy') {
 						<h3><small>Environment variables can become tricker without an environment</small></h3>
 						<p>
 							<small class="fragment">How do you define an environment variable in S3?</small>
-							<small class="fragment">Static config files must be hot-swapped per environment</small>
-							<small class="fragment">Lambda supports container-level environment variables</small>
+						</p>
+						<p>
+							<small class="fragment">Static config files must be hot-swapped per environment.</small>
+						</p>
+						<p>
+							<small class="fragment">Lambda supports container-level environment variables.</small>
 						</p>
 					</section>
 					<section>
 						<h2>Caveats</h2>
 						<h3><small>5 minute execution limit</small></h3>
 						<p>
-							<small class="fragment">For long-running processes (File upload/download, ETL, long polling jobs), consider using traditional servers</small>
-							<small class="fragment">For jobs which can be chunked, it is possible to 'save and continue' by doing a slice of work and then recursing</small>
-							<small class="fragment">The default timeout is 3s, and the most cost effective model for execution is quick burst.  Any functions which regularly take over a minute may be good candidates for tradtional servers.</small>
+							<small class="fragment">For long-running processes (file upload/download, ETL, long polling jobs), consider using traditional servers.</small>
+						</p>
+						<p>
+							<small class="fragment">For jobs which can be chunked, it is possible to 'save and continue' by doing a slice of work and then recursing.</small>
+						</p>
+						<p>
+							<small class="fragment">The default timeout is 3s, and the most cost effective model for execution is quick burst.  Any functions which regularly take over a minute may be good candidates for traditional servers.</small>
 						</p>
 					</section>
 				</section>
@@ -340,8 +366,8 @@ stage('deploy') {
 				<section style="text-align: left;">
 					<h2>References</h2>
 					<p>
-						- <a href="https://aws.amazon.com/s3/">AWS S3 -- serverless frontend of choice</a> <br>
-						- <a href="https://aws.amazon.com/lambda/">AWS Lambda -- serverless backend of choice</a> <br>
+						- <a href="https://aws.amazon.com/s3/">AWS S3 -- serverless front end of choice</a> <br>
+						- <a href="https://aws.amazon.com/lambda/">AWS Lambda -- serverless back end of choice</a> <br>
 						- <a href="https://aws.amazon.com/api-gateway/">AWS API Gateway -- the REST glue to our lambda functions</a> <br>
 						- <a href="https://serverless.com/">Serverless Framework -- deployment specialists</a> <br>
 						- <a href="https://github.com/hakimel/reveal.js">Reveal.js -- what this presentation was built with</a>
