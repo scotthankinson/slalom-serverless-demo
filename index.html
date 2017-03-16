@@ -331,7 +331,11 @@ stage('deploy') {
 						<h3><small>Database interactions can become trickier without a REST interface</small></h3>
 						<p>
 							<small class="fragment">There are strategies for sharing a connection pool, but you are not guaranteed to be able to re-use containers across invocations.  Best effort applies.</small>
+						</p>
+						<p>
 							<small class="fragment">For high throughput, a traditional ORM-backed server environment may still be required.</small>
+						</p>
+						<p>
 							<small class="fragment">Where possible, consider using DynamoDB or any other data layer with ready to use REST APIs.</small>
 						</p>
 					</section>
