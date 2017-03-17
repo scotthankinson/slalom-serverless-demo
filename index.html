@@ -225,16 +225,16 @@ public class Hello {
 					<section>
 						<h2>Organization - Front End</h2>
 						<p>
-							<small>Use a different CloudFront distrubtion for each lifecycle</small>
+							<small>Wrap your S3 websites in Cloudformation distributions.  S3 is HTTP only, CloudFront supports HTTPS.</small>
 						</p>
 						<p>
-							<small class="fragment">Create a different bucket for each Lifecycle</small>
+							<small>Use DNS to expose your apps and also to make lifecycle management easy.</small>
 						</p>
 						<p>
-							<small class="fragment">Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments</small>
+							<small class="fragment">Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments.</small>
 						</p>
 						<p>
-							<small class="fragment">For continuous integration, automate dropping the right config file for that environment before syncing</small>
+							<small class="fragment">For continuous integration, automate dropping the right config file for that environment before syncing.</small>
 						</p>
 						<p>
 							<small class="fragment">Remember, anything in the bucket is publicly accessible -- don't put API keys in here!</small>
