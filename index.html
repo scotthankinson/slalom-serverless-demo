@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Serverless Compute</title>
+		<title>Modern Applications</title>
 
-		<meta name="description" content="Building full stack websites with minimal infrastructure">
+		<meta name="description" content="AWS building blocks for moving beyond monoliths">
 		<meta name="author" content="Scott Hankinson">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,170 +41,168 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Going Serverless</h1>
-					<h4>Building blocks and patterns for moving beyond servers</h4>
+					<h1>Modern Applications</h1>
+					<h4>AWS building blocks for moving beyond monoliths</h4>
 					<br>
 					<p>
-						<small>Created by Scott Hankinson</a> / Slalom Consulting</small>
+						<small>Prepared by Scott Hankinson</a> / Slalom Consulting</small>
 					</p>
 				</section>
 
 				<section>
 					<section>
-						<h2>What is Serverless?</h2>
+						<img data-src="assets/About_Slalom.png"></img>
+					</section>
+					<section>
+						<img data-src="assets/About_Slalom_2.png"></img>
+					</section>
+					<section>
+						<img data-src="assets/About_Slalom_3.png"></img>
+					</section>
+					<section>
+						<img data-src="assets/About_Slalom_4.png"></img>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>What are Microservices?</h2>
 						<small>
-							<q cite="https://en.wikipedia.org/wiki/Serverless_computing">
-								&ldquo;Serverless computing, also known as function as a service (FaaS), is a cloud computing code execution model in which the cloud provider fully manages starting and stopping of a function's container platform as a service (PaaS) as necessary to serve requests, and requests are billed by an abstract measure of the resources required to satisfy the request, rather than per virtual machine, per hour.&rdquo;
+							<q cite="https://aws.amazon.com/microservices/">
+								&ldquo;Microservices are an architectural and organizational approach to software development where software is composed of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams. &rdquo;
 							</q>
 						</small>
 					</section>
 					<section>
 						<small>
-							<q cite="https://en.wikipedia.org/wiki/Serverless_computing">
-								<b>&ldquo;Despite the name, it does not actually involve running code without servers</b>. The name "serverless computing" is used because the business or person that owns the system does not have to purchase, rent or provision servers or virtual machines for the back-end code to run on.&rdquo;
+							<q cite="https://aws.amazon.com/microservices/">
+								&ldquo;Microservices architectures make applications easier to scale and faster to develop, enabling innovation and accelerating time-to-market for new features.&rdquo;
 								<br>
 								<br>
-								Miller, Ron (24 Nov 2015). <a href="https://techcrunch.com/2015/11/24/aws-lamda-makes-serverless-applications-a-reality/">"AWS Lambda Makes Serverless Applications A Reality"</a>
+								AWS Documentation. <a href="https://aws.amazon.com/microservices/">"Microservices on AWS"</a>
 							</q>
 						</small>
 					</section>
-				</section>
-<!--
-				<section>
 					<section>
-						<h2>Who are the providers?</h2>
-						<img data-src="assets/providers_black.png"></img>
-						<p>
-							<small>AWS is regarded as the first major cloud provider to offer Serverless Functions, debuting AWS Lambda at re:Invent in 2014.  IBM OpenWhisk and Microsoft Azure Functions became generally available in 2016, and as of this writing Google Cloud Functions have just entered public beta.</small>
-						</p>
+						<small>
+							Breaking apart and refactoring a monolithic application takes a lot of work.
+						</small>
+						<img data-src="assets/AWS_Monolith_to_Micro.png" style="Background-color: white"></img>
+						<br/>
+						<small>
+							So why is everybody doing it?
+						</small>
 					</section>
 					<section>
-						<h2>What does this presentation cover?</h2>
-						<img data-src="assets/AWS_BW.png"></img>
-						<p>
-							<small>Practical experience and ready to demo code mean that this presentation focuses largely on AWS tooling and components.  Many of the concepts may be transferable, but the core lens we will be using is Amazon Web Services </small>
-						</p>
-					</section>
-				</section>
--->								
-				<section>
-					<section>
-						<h2>What languages are supported?</h2>
-						<p>
-							<img data-src="assets/Lambda_Inline.PNG"></img>
-							<small>Node.js, Python, and Ruby support in-line code editing for quick testing, while Java, C#, Go, and PowerShell require deployment packages.  Code is executed either on Amazon Linux or Amazon Linux 2 and includes several pre-packaged libraries and environment variables. For any complex function, deployment packages will be a must.</small>
-						</p>
+						<small>
+							<h2>Agility</h2>
+							Microservices foster an organization of small, independent teams that take ownership of their services. Teams act within a small and well understood context, and are empowered to work more independently and more quickly. This shortens development cycle times. You benefit significantly from the aggregate throughput of the organization.
+						</small>
 					</section>
 					<section>
-						<h2>Node.js 8.10 and 10</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-exports.handler =  async function(event, context) {
-  console.log("EVENT: \n" + JSON.stringify(event, null, 2))
-  return context.logStreamName
-}
-
-						</code></pre>
+						<small>
+							<h2>Flexible Scaling</h2>
+							Microservices allow each service to be independently scaled to meet demand for the application feature it supports. This enables teams to right-size infrastructure needs, accurately measure the cost of a feature, and maintain availability if a service experiences a spike in demand.
+						</small>
 					</section>
 					<section>
-						<h2>Python 2.7, 3.6, and 3.7</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-from __future__ import print_function
-
-import json
-
-print('Loading function')
-
-def lambda_handler(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
-    print("value1 = " + event['key1'])
-    print("value2 = " + event['key2'])
-    print("value3 = " + event['key3'])
-    return event['key1']  # Echo back the first key value
-    #raise Exception('Something went wrong')
-
-						</code></pre>
+						<small>
+							<h2>Easy Deployment</h2>
+							Microservices enable continuous integration and continuous delivery, making it easy to try out new ideas and to roll back if something doesn’t work. The low cost of failure enables experimentation, makes it easier to update code, and accelerates time-to-market for new features.
+						</small>
 					</section>
 					<section>
-						<h2>Ruby 2.5</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-module LambdaFunctions
-  class Handler
-    def self.process(event:,context:)
-      "Hello!"
-    end
-  end
-end
-
-						</code></pre>
-					</section>					
-					<section>
-						<h2>Java 8</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-package example;
-
-import com.amazonaws.services.lambda.runtime.Context; 
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-
-public class Hello {
-    public String myHandler(int myCount, Context context) {
-        LambdaLogger logger = context.getLogger();
-        logger.log("received : " + myCount);
-        return String.valueOf(myCount);
-    }
-}
-
-						</code></pre>
+						<small>
+							<h2>Technological Freedom</h2>
+							Microservices architectures don’t follow a “one size fits all” approach. Teams have the freedom to choose the best tool to solve their specific problems. As a consequence, teams building microservices can choose the best tool for each job.
+						</small>
 					</section>
 					<section>
-						<h2>Go 1.x</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-package main
-
-import (
-        "fmt"
-        "context"
-        "github.com/aws/aws-lambda-go/lambda"
-)
-
-type MyEvent struct {
-        Name string `json:"name"`
-}
-
-func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
-        return fmt.Sprintf("Hello %s!", name.Name ), nil
-}
-
-func main() {
-        lambda.Start(HandleRequest)
-}
-
-						</code></pre>
-					</section>					
+						<small>
+							<h2>Reusable Code</h2>
+							Dividing software into small, well-defined modules enables teams to use functions for multiple purposes. A service written for a certain function can be used as a building block for another feature. This allows an application to bootstrap off itself, as developers can create new capabilities without writing code from scratch.
+						</small>
+					</section>
 					<section>
-						<h2>.NET Core 1.0 and 2.1, PowerShell 6.0</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-using Amazon.Lambda.Core; 
-namespace LambdaFunctionExample{
-public class Hello {
-    public string MyHandler(int count, ILambdaContext context) {
-        var logger = context.Logger;
-        logger.log("received : " + count);
-        return count.ToString();
-    }
-  }
-}
-
-						</code></pre>
-					</section>		
-					<section>
-						<h2>Or bring your own!</h2>
-						<img data-src="assets/Lambda_Custom.png"></img>
-					</section>										
+						<small>
+							<h2>Resilience</h2>
+							Service independence increases an application’s resistance to failure. In a monolithic architecture, if a single component fails, it can cause the entire application to fail. With microservices, applications handle total service failure by degrading functionality and not crashing the entire application.
+						</small>
+					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>How does it work?</h2>
+						<h2>How can AWS help?</h2>
+					</section>
+					<section>
+						<small><h2>Building Blocks</h2></small>
+						<img data-src="assets/AWS_Landscape.png" style="background-color: white"></img>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Containers</h2>
+						<img data-src="assets/AWS_Container_How.png"></img>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Container Service</h2>
+							<img data-src="assets/AWS_ECS_How.png"></img>
+						</small>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Container Service</h2>
+							<p>
+								- notes on ECS <br/>
+								- why to pick it <br/>
+								- filling some space <br/>
+							</p>
+						</small>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Kubernetes Service</h2>
+							<img data-src="assets/AWS_EKS_How.png"></img>
+						</small>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Kubernetes Service</h2>
+							<p>
+								- notes on EKS<br/>
+								- why to pick it <br/>
+								- filling some space <br/>
+							</p>
+						</small>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Beanstalk</h2>
+							<img data-src="assets/AWS_EB_Docker.png"></img>
+						</small>
+					</section>
+					<section>
+						<small>
+							<h2>Elastic Beanstalk</h2>
+							<p>
+								- notes on EB <br/>
+								- why to pick it <br/>
+								- filling some space <br/>
+							</p>
+						</small>
+					</section>
+					<section>
+						<h2><a href="https://go.slalom.com/AWS-financial-services">Containers in the Wild</a></h2>
+						<p>replace me with a case study slide</p>
+					</section>
+				</section>			
+
+				<section>
+					<section>
+						<h2>Serverless</h2>
 						<img data-src="assets/Lambda_HowItWorks.png"></img>
 					</section>
 					<section>
@@ -231,183 +229,27 @@ public class Hello {
 						<h3>IoT Backends</h3>
 						<img data-src="assets/Lambda_IoT.png"></img>
 					</section>
-				</section>
-
+					<section>
+						<h2><a href="https://www.slalom.com/case-studies/georgia-state-university-serverless-aws">Serverless in the wild</a></h2>
+						<p>replace me with a case study slide</p>
+					</section>
+				</section>			
+				
 				<section>
 					<section>
-						<h2>Reference Architecture Time!</h2>
-					</section>
-					<section>
-						<h2>Traditional Web Architecture</h2>
-						<img width="500" height="auto" data-src="assets/WebArchitecture.png"</img>
-					</section>
-					<section>
-						<h2>Serverless Architecture</h2>
-						<img width="400" height="auto" data-src="assets/ServerlessArchitecture.png"</img>
+						<h2>Add a Thank You slide</h2>
 					</section>
 				</section>
-
-				<section>
-					<section>
-						<h2>Organization and Automation</h2>
-						<p>
-							<small>Lambda sounds awesome!  What happens when I have something bigger than hello world?</small>
-							<small>How do I manage my-awesome-function across lifecycles?</small>
-							<small>Are there convenient ways of grouping shared functionality?</small>
-						</p>
-					</section>
-					<section>
-						<h2>Organization - Front End</h2>
-						<p>
-							<small>Wrap your S3 websites in Cloud Front distributions.  S3 is HTTP only, CloudFront supports HTTPS.</small>
-						</p>
-						<p>
-							<small class="fragment">Use DNS to expose your apps and also to make lifecycle management easy.</small>
-						</p>
-						<p>
-							<small class="fragment">Consider storing multiple versions of your application in a staging bucket to allow for blue-green deployments.</small>
-						</p>
-						<p>
-							<small class="fragment">For continuous integration, automate dropping the right config file for that environment before syncing.</small>
-						</p>
-						<p>
-							<small class="fragment">Remember, anything in the bucket is publicly accessible -- don't put API keys in here!</small>
-						</p>
-					</section>
-					<section>
-						<h2>Automation - Front End</h2>
-						<pre><code class="hljs" data-trim contenteditable>
-stage('update environment'){
-    node {
-        echo '@@@@ Setting Environment Variables File for DEV @@@@'
-        sh "rm ./www/assets/json/env.json"
-        sh "rm ./www/assets/json/env.qa.json"
-        sh "rm ./www/assets/json/env.prod.json"
-        sh "mv ./www/assets/json/env.dev.json ./www/assets/json/env.json"        
-    }
-}
-stage('deploy') {
-    node {
-        withCredentials([
-            string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
-            string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh '''aws s3 sync ./www s3://$BUCKET --delete'''
-            }
-    }
-}
-						</code></pre>
-					</section>
-					<section>
-						<h2>Organization - Back End</h2>
-						<p>
-							<small>How do you manage routes across multiple API Gateways leveraging multiple groups of Lamba Functions?</small>
-							<img class="fragment" data-src="assets/serverless-logo.png"></img>
-						</p>
-					</section>
-					<section>
-						<h2>Organization - Back End</h2>
-						<img width="300px" data-src="assets/serverless-logo.png"></img>
-						<p>
-							<small>Serverless Framework provides a way of describing a serverless "application", and then handles generating the CloudFormation to deploy these functions as a unit.</small>
-						</p>
-						<p>
-							<small class="fragment">Multiple Serverless Framework applications may then be rolled up under a single API Gateway to generate the public facing API layer.</small>
-						</p>
-						<p>
-							<small class="fragment">Group like code with like in the repository, and have Jenkins issue the command 'serverless deploy' to update the code</small>
-						</p>
-					</section>
-					<section>
-						<h2>Organization - Back End</h2>
-						<img data-src="assets/GatewayOfGateways.png"></img>
-					</section>
-					<section>
-						<h2>Automation - Back End</h2>
-						<img data-src="assets/ServerlessDeploy.png"></img>
-					</section>
-				</section>
-
-				<section>
-					<h2>Demo</h2>
-					<ol>
-						<li>Route 53 / DNS Configuration</li>
-						<li>Front End - CloudFormation and S3</li>
-						<li>Back End - Serverless Framework</li>
-					</ol>
-				</section>
-
-				<section>
-					<section>
-						<h2>Caveats</h2>
-						<h3><small>All Web content must be static</small></h3>
-						<p>
-							<small class="fragment">We already follow this architectural pattern in may places -- static web content fueled by disconnected backend APIs using OAuth or OpenId.</small>
-						</p>
-						<p>
-							<small class="fragment">Angular and React are common choices for single page applications, but this presentation is plain HTML and javascript.</small>
-						</p>
-					</section>
-					<section>
-						<h2>Caveats</h2>
-						<h3><small>All APIs should be stateless</small></h3>
-						<p>
-							<small class="fragment">Functions should not rely on state stored to memory or disk, and have limited access to the underlying hardware and environment.</small>
-						</p>
-						<p>
-							<small class="fragment">Consider using DynamoDB, Redis, or S3 to store stateful information.</small>
-						</p>
-						<p>
-							<small class="fragment">Keep your functions lean -- too many items in startup lead to slow bloated functions.</small>
-						</p>
-					</section>
-					<section>
-						<h2>Caveats</h2>
-						<h3><small>Database interactions can become trickier without a REST interface</small></h3>
-						<p>
-							<small class="fragment">There are strategies for sharing a connection pool, but you are not guaranteed to be able to re-use containers across invocations.  Best effort applies.</small>
-						</p>
-						<p>
-							<small class="fragment">For high throughput, a traditional ORM-backed server environment may still be required.</small>
-						</p>
-						<p>
-							<small class="fragment">Where possible, consider using DynamoDB or any other data layer with ready to use REST APIs.</small>
-						</p>
-					</section>
-					<section>
-						<h2>Caveats</h2>
-						<h3><small>Environment variables can become tricker without an environment</small></h3>
-						<p>
-							<small class="fragment">How do you define an environment variable in S3?</small>
-						</p>
-						<p>
-							<small class="fragment">Static config files must be hot-swapped per environment.</small>
-						</p>
-						<p>
-							<small class="fragment">Lambda supports container-level environment variables.</small>
-						</p>
-					</section>
-					<section>
-						<h2>Caveats</h2>
-						<h3><small>5 minute execution limit</small></h3>
-						<p>
-							<small class="fragment">For long-running processes (file upload/download, ETL, long polling jobs), consider using traditional servers.</small>
-						</p>
-						<p>
-							<small class="fragment">For jobs which can be chunked, it is possible to 'save and continue' by doing a slice of work and then recursing.</small>
-						</p>
-						<p>
-							<small class="fragment">The default timeout is 3s, and the most cost effective model for execution is quick burst.  Any functions which regularly take over a minute may be good candidates for traditional servers.</small>
-						</p>
-					</section>
-				</section>
-
+				
 				<section style="text-align: left;">
 					<h2>References</h2>
 					<p>
-						- <a href="https://aws.amazon.com/s3/">AWS S3 -- serverless front end of choice</a> <br>
-						- <a href="https://aws.amazon.com/lambda/">AWS Lambda -- serverless back end of choice</a> <br>
-						- <a href="https://aws.amazon.com/api-gateway/">AWS API Gateway -- the REST glue to our lambda functions</a> <br>
-						- <a href="https://serverless.com/">Serverless Framework -- deployment specialists</a> <br>
+						- <a href="https://aws.amazon.com/microservices/">AWS Microservices </a><br/>
+						- <a href="https://aws.amazon.com/lambda/">AWS Lambda </a> <br>
+						- <a href="https://aws.amazon.com/fargate/">AWS Fargate </a> <br>
+						- <a href="https://aws.amazon.com/ecs/">Amazon ECS </a> <br>
+						- <a href="https://aws.amazon.com/eks/">Amazon EKS </a> <br>
+						- <a href="https://aws.amazon.com/s3/">Amazon S3 </a> <br>
 						- <a href="https://github.com/hakimel/reveal.js">Reveal.js -- what this presentation was built with</a>
 					</p>
 				</section>
