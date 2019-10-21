@@ -45,8 +45,15 @@
 					<h4>AWS building blocks for moving beyond monoliths</h4>
 					<br>
 					<p>
-						<small>Prepared by Scott Hankinson</a> / Slalom Consulting</small>
+						<small>Prepared by Scott Hankinson / Slalom Consulting</small>
 					</p>
+					<aside class="notes">
+						Reminder:  Slides go down before the go across<br/>
+						Space Bar: next slide (down or across)<br/>
+						F: full screen<br/>
+						S: Speaker notes<br/>
+						Esc: Full view<br/>
+					</aside>
 				</section>
 
 				<section>
@@ -70,18 +77,29 @@
 						<small>
 							<q cite="https://aws.amazon.com/microservices/">
 								&ldquo;Microservices are an architectural and organizational approach to software development where software is composed of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams. &rdquo;
+								<br/><br/>
+								<a href="https://aws.amazon.com/microservices/">"Microservices on AWS"</a>
+								<aside class="notes">
+									Amazon is famous for breaking apart into Two Pizza teams -- if a team can't be fed with two pizzas, it's too big
+								</aside>
 							</q>
 						</small>
 					</section>
 					<section>
-						<small>
-							<q cite="https://aws.amazon.com/microservices/">
-								&ldquo;Microservices architectures make applications easier to scale and faster to develop, enabling innovation and accelerating time-to-market for new features.&rdquo;
-								<br>
-								<br>
-								AWS Documentation. <a href="https://aws.amazon.com/microservices/">"Microservices on AWS"</a>
-							</q>
-						</small>
+						<h2>Microservices are...<span class="fragment">Autonomous</span></h2>
+						<div class="fragment">
+							<small>
+								<p>Each component service in a microservices architecture can be developed, deployed, operated, and scaled without affecting the functioning of other services. Services do not need to share any of their code or implementation with other services. Any communication between individual components happens via well-defined APIs.</p>
+							</small>
+						</div>
+					</section>
+					<section>
+						<h2>Microservices are...<span class="fragment">Specialized</span></h2>
+						<div class="fragment">
+							<small>
+								<p>Each service is designed for a set of capabilities and focuses on solving a specific problem. If developers contribute more code to a service over time and the service becomes complex, it can be broken into smaller services.</p>
+							</small>
+						</div>
 					</section>
 					<section>
 						<small>
@@ -89,7 +107,7 @@
 						</small>
 						<img data-src="assets/AWS_Monolith_to_Micro.png" style="Background-color: white"></img>
 						<br/>
-						<small>
+						<small class="fragment">
 							So why are companies doing it?
 						</small>
 					</section>
@@ -98,36 +116,55 @@
 							<h2>Agility</h2>
 							Microservices foster an organization of small, independent teams that take ownership of their services. Teams act within a small and well understood context, and are empowered to work more independently and more quickly. This shortens development cycle times. You benefit significantly from the aggregate throughput of the organization.
 						</small>
+						<aside class="notes">
+							This also aligns with modern agile development practices -- breaking work into smaller units and making releases more frequent.
+						</aside>
 					</section>
 					<section>
 						<small>
 							<h2>Flexible Scaling</h2>
 							Microservices allow each service to be independently scaled to meet demand for the application feature it supports. This enables teams to right-size infrastructure needs, accurately measure the cost of a feature, and maintain availability if a service experiences a spike in demand.
 						</small>
+						<aside class="notes">
+							In the old world, if our User service runs hot, we scale the whole monolith and end up with extra copies of everything.  This is wasteful.
+						</aside>
 					</section>
 					<section>
 						<small>
 							<h2>Easy Deployment</h2>
 							Microservices enable continuous integration and continuous delivery, making it easy to try out new ideas and to roll back if something doesn’t work. The low cost of failure enables experimentation, makes it easier to update code, and accelerates time-to-market for new features.
 						</small>
+						<aside class="notes">
+							In the old world, if our User service runs hot, we scale the whole monolith and end up with extra copies of everything.  This is wasteful.
+						</aside>
 					</section>
 					<section>
 						<small>
 							<h2>Technological Freedom</h2>
 							Microservices architectures don’t follow a “one size fits all” approach. Teams have the freedom to choose the best tool to solve their specific problems. As a consequence, teams building microservices can choose the best tool for each job.
 						</small>
+						<aside class="notes">
+							This is also an area where AWS shines -- the breadth of purpose-built tooling available lets you match the workload to the data store.
+							<a href="https://aws.amazon.com/blogs/aws/migration-complete-amazons-consumer-business-just-turned-off-its-final-oracle-database/">Recent Announcement</a>
+						</aside>						
 					</section>
 					<section>
 						<small>
 							<h2>Reusable Code</h2>
 							Dividing software into small, well-defined modules enables teams to use functions for multiple purposes. A service written for a certain function can be used as a building block for another feature. This allows an application to bootstrap off itself, as developers can create new capabilities without writing code from scratch.
 						</small>
+						<aside class="notes">
+							This can manifest in multiple ways -- new services don't need to solve authentication problems because the Auth Service has it covered.  Likewise new services may also use existing services as a template to quickly deliver access to a new feature.
+						</aside>						
 					</section>
 					<section>
 						<small>
 							<h2>Resilience</h2>
 							Service independence increases an application’s resistance to failure. In a monolithic architecture, if a single component fails, it can cause the entire application to fail. With microservices, applications handle total service failure by degrading functionality and not crashing the entire application.
 						</small>
+						<aside class="notes">
+							Many of these topics could be expanded to a whole talk by themselves, but this one is especially dense.  If you are new to MicroServices, I strongly recommend you lookup Netflix Chaos Engineering.
+						</aside>							
 					</section>
 				</section>
 
@@ -138,6 +175,9 @@
 					<section>
 						<small><h2>Building Blocks</h2></small>
 						<img data-src="assets/AWS_Landscape.png" style="background-color: white"></img>
+						<aside class="notes">
+							AWS 
+						</aside>								
 					</section>
 				</section>
 
@@ -151,6 +191,9 @@
 							<h2>Elastic Beanstalk</h2>
 							<img data-src="assets/Beanstalk_Graphic.jpg" style="max-width: 720px; max-height: auto"></img>
 						</small>
+						<aside class="notes">
+							EB is a PaaS offering that makes deploying applications easy in AWS.  It supports a lot of application types, including Docker.
+						</aside>								
 					</section>
 					<section>
 						<small>
@@ -202,8 +245,7 @@
 						</small>
 					</section>
 					<section>
-						<h2><a href="https://go.slalom.com/AWS-financial-services">Containers in the Wild</a></h2>
-						<p>replace me with a case study slide</p>
+						<img data-src="assets/Slalom_EKS_Story.png"></img>
 					</section>
 				</section>			
 
@@ -241,14 +283,19 @@
 						<img data-src="assets/Lambda_IoT.png"></img>
 					</section>
 					<section>
-						<h2><a href="https://www.slalom.com/case-studies/georgia-state-university-serverless-aws">Serverless in the wild</a></h2>
-						<p>replace me with a case study slide</p>
+						<img data-src="assets/Slalom_Serverless_Story.png"></img>
 					</section>
 				</section>			
 				
 				<section>
 					<section>
-						<h2>Add a Thank You slide</h2>
+						<h2>Questions?</h2>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Thank You!</h2>
 					</section>
 				</section>
 				
