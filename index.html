@@ -289,10 +289,6 @@ public class Hello {
 						<h2>What about a real example?</h2>
 					</section>
 					<section>
-						<h3>Web Applications (Review)</h3>
-						<img data-src="assets/Lambda_WebApplications.png"></img>
-					</section>
-					<section>
 						<h3>Traditional Web Architecture</h3>
 						<img width="500" height="auto" data-src="assets/WebArchitecture.png"</img>
 					</section>
@@ -303,16 +299,95 @@ public class Hello {
 					<section>
 						<img data-src="assets/Slalom_Serverless_Story.png"></img>
 					</section>					
+					<section>
+						<img width="575" height="auto" data-src="assets/GSU_Architecture_2.0.png"></img>
+					</section>					
 				</section>
 
 				<section>
-					<h2>Demo</h2>
-					<ol>
-						<li>Route 53 / DNS Configuration / ACM</li>
-						<li>HTTP Front End - Route53 and S3</li>
-						<li>HTTPS Front End - Route 53, CloudFront and S3</li>
-						<li>Back End - Route53, API Gateway, and Lambda</li>
-					</ol>
+					<section>
+						<h2>Demo</h2>
+						<ol>
+							<li>Route 53 / DNS Configuration / ACM</li>
+							<li>HTTP Front End - Route53 and S3</li>
+							<li>HTTPS Front End - Route 53, CloudFront and S3</li>
+							<li>Back End - Route53, API Gateway, and Lambda</li>
+						</ol>
+					</section>
+					<section>
+						Screenshots of the demo for posterity!
+					</section>
+					<section>
+						Purchase a domain and create a Hosted Zone in Route 53 for slalom-serverless-demo.com
+						<img data-src="assets/Walkthrough_Route53_Config.png"></img>
+					</section>
+					<section>
+						Static Website in S3 (HTTP Only)<br/>
+						<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html">(Documentation)</a>
+					</section>
+					<section>
+						Create an S3 bucket "www.slalom-serverless-demo.com" and upload some HTML (this HTML)
+						<img data-src="assets/Walkthrough_S3.png"></img>
+					</section>
+					<section>
+						Enable static website hosting
+						<img style="max-width: 500px; max-height: auto;" data-src="assets/Walkthrough_S3_Website_Hosting.png"></img>
+					</section>
+					<section>
+						Enable public read
+						<img data-src="assets/Walkthrough_S3_PublicRead.png"></img>
+					</section>
+					<section>
+						Add an alias for www.slalom-serverless-demo.com pointing at our S3 bucket
+						<img data-src="assets/Walkthrough_Route53_S3.png"></img>
+					</section>	
+					<section>
+						Success!  <br/>A static HTTP Website (this one) has been deployed
+					</section>
+					<section>
+						Static Website with CloudFront (HTTPS Enabled)<br/>
+						<a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html">(Documentation)</a>
+					</section>
+					<section>
+						Creat a certificate using ACM for <br/>*.slalom-serverless-demo.com<br/> and let it validate automatically via DNS using the provided option
+						<img data-src="assets/Walkthrough_ACM.png"></img>
+					</section>
+					<section>
+						Repeat the previous S3 Setup, but the bucket name can be anyting you like
+						<img data-src="assets/Walkthrough_S3_HTTPS.png"></img>
+					</section>
+					<section>
+						Create a CloudFront Web Distribution pointing at your S3 bucket<br/>
+						<img data-src="assets/Walkthrough_CloudFront.png"></img><br/>
+						Use the alternate domain name 'calculator.slalom-serverless-demo.com' and use our ACM certificate.  Set the default root object to 'index.html'.
+					</section>
+					<section>
+						Add the Alias entry for 'calculator.slalom-serverless-demo.com' to your Route53 Hosted Zone, targeting the CloudFront distribution created in the last step.
+						<img data-src="assets/Walkthrough_Route53_CloudFront.png"></img><br/>
+					</section>
+					<section>
+						Success!  We now have an HTTPS-secured static website!<br/>
+						<img data-src="assets/Walkthrough_HTTPS_Enabled.png"></img><br/>
+					</section>
+					<section>
+						Next deploy the back-end
+						<img style="max-width: 640px; max-height: auto;" data-src="assets/Walkthrough_Deploy_API.png"></img><br/>
+					</section>
+					<section>
+						Create an API Gateway Custom Domain Name targeting the API and using the certificate for<br/>
+						api.slalom-serverless-demo.com<br/>
+						<img style="max-width: 400px; max-height: auto;" data-src="assets/Walkthrough_CustomDomainName.png"></img><br/>
+					</section>
+					<section>
+						Add the Alias entry for 'api.slalom-serverless-demo.com' to your Route53 Hosted Zone, targeting the 'target domain name' generated in the last step
+						<img data-src="assets/Walkthrough_Route53_APIGW.png"></img><br/>
+					</section>
+					<section>
+						Success!  <br/>A static HTTPS Website (this one) has been deployed with a Lambda-backed API!
+						<br/><br/>
+						<a href="https://github.com/scotthankinson/slalom-serverless-demo/tree/original">Link to Presentation website</a><br/>
+						<a href="https://github.com/scotthankinson/calculator">Link to Calculator website</a>
+					</section>
 				</section>
 
 				<section>
@@ -327,7 +402,7 @@ public class Hello {
 					<section>
 						<h2>Organization - Front End</h2>
 						<p>
-							<small>Wrap your S3 websites in Cloud Front distributions.  S3 is HTTP only, CloudFront supports HTTPS.</small>
+							<small>Wrap your S3 websites in CloudFront distributions.  S3 is HTTP only, CloudFront supports HTTPS.</small>
 						</p>
 						<p>
 							<small class="fragment">Use DNS to expose your apps and also to make lifecycle management easy.</small>
